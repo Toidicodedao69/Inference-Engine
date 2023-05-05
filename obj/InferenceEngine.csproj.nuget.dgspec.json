@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\InferenceEngine\\InferenceEngine.csproj": {}
+    "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj": {}
   },
   "projects": {
-    "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\InferenceEngine\\InferenceEngine.csproj": {
+    "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\InferenceEngine\\InferenceEngine.csproj",
+        "projectUniqueName": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
         "projectName": "InferenceEngine",
-        "projectPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\InferenceEngine\\InferenceEngine.csproj",
+        "projectPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\InferenceEngine\\obj\\",
+        "outputPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
