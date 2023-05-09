@@ -52,6 +52,11 @@ namespace InferenceEngine
                 _symbols.Add(_right);
             }
         }
+        
+        public void Construct()
+        {
+
+        }
         public List<string> getSymbols {  get { return _symbols; } }   
         public string getSentence { get { return _sentence; } }
         public List<string> getConnective { get { return _connectives; } }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jCGHb4/htLhTInEmJMW6l1DiUR2b+x3PB3CZtifH6CcEc+LXbU7VzKL1xYlAaI6LszHniLDOJMkZbmXZAVXnFQ==",
+  "dgSpecHash": "hSs6eGk0K30wy16NisJCPvtlTvwTw3eYx8MEEPLOeQq/WFLbYrLOq3AkP517URzqWX3mT+34N9Eiip9q6umQAw==",
   "success": true,
-  "projectFilePath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
+  "projectFilePath": "E:\\Inference-Engine\\InferenceEngine.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
