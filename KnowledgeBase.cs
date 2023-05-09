@@ -12,6 +12,7 @@ namespace InferenceEngine
     {
         private List<Sentence> _sentences;  // List of all senteces/ clauses
         private List<string> _symbols; // List of all DISTINCT symbols
+        private Sentence _query;
         public KnowledgeBase() 
         {
             _symbols = new List<string>();
@@ -28,9 +29,10 @@ namespace InferenceEngine
                 string kB = reader.ReadLine(); // This line contains all sentences/clauses
 
                 reader.ReadLine();  // "ASK" keyword
-                string query = reader.ReadLine(); // The query 
+                _query = new Sentence(reader.ReadLine()); // The query 
 
                 kB = Regex.Replace(kB, @"\s+", ""); // Remove all whitespaces
+                kB = kB.TrimEnd(';');
 
                 string[] clauses = kB.Split(";");   // Get each clause
 
@@ -48,17 +50,17 @@ namespace InferenceEngine
 
                 _symbols = _symbols.Distinct().ToList(); // Remove all duplicated symbols
 
-                // Check the symbols list
-                foreach(string s in _symbols)
-                {
-                    Console.WriteLine(s);
-                }
+                //// Check the symbols list
+                //foreach(string s in _symbols)
+                //{
+                //    Console.WriteLine(s);
+                //}
 
-                // Check the sentence list
-                foreach (Sentence s in _sentences)
-                {
-                    Console.WriteLine(s.getSentence);       
-                }
+                //// Check the sentence list
+                //foreach (Sentence s in _sentences)
+                //{
+                //    Console.WriteLine(s.getSentence);       
+                //}
             }
             catch (Exception ex)
             {
@@ -68,5 +70,6 @@ namespace InferenceEngine
         }
         public List<Sentence> getSentences { get { return _sentences; } } 
         public List<string> getSymbols { get { return _symbols; } }
+        public Sentence getQuery { get { return _query; } }
     }
 }

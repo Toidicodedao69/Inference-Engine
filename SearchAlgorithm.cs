@@ -8,6 +8,6 @@ namespace InferenceEngine
 {
     public abstract class SearchAlgorithm
     {
-        public abstract void EntailQuery();
+        public abstract void Entails();
     }
 }

@@ -8,6 +8,9 @@ namespace InferenceEngine
         {
             KnowledgeBase kB = new KnowledgeBase();
             kB.ReadFile(args[0]);
+
+            SearchAlgorithm FC = new ForwardChaining(kB);
+            FC.Entails();
         }
 
     }
