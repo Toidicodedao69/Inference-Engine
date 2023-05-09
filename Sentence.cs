@@ -55,7 +55,7 @@ namespace InferenceEngine
         
         public void Construct()
         {
-
+ 
         }
         public List<string> getSymbols {  get { return _symbols; } }   
         public string getSentence { get { return _sentence; } }
