@@ -15,6 +15,7 @@ namespace InferenceEngine
         private string _sentence;
         private string _left, _right;
         private int _count;
+        private bool _isAtomic;
         
         public Sentence(string sentence)
         {
@@ -22,6 +23,7 @@ namespace InferenceEngine
             _connectives = new List<string>();
             _sentence = sentence;
             _count = 0;
+            _isAtomic = false;
             Initialize();
         }
 
@@ -29,32 +31,34 @@ namespace InferenceEngine
         // This method is called inside the constructor
         public void Initialize()
         {
-            if (_sentence.Length <= 2) // A symbol
+            if (_sentence.Length <= 2) // A symbol - later we will have <=> which will have the length of 3 lol
             {
                 _symbols.Add(_sentence);
+                _isAtomic = true;
             }
             else
             {
-                string[] side = Regex.Split(_sentence, @"[=>]+");       // Split left side and right side of the sentence
-                //foreach (string s in side)
-                //{
-                //    Console.WriteLine(s);
-                //}
-                _left = side[0];
-                _right = side[1];
+                    string[] side = Regex.Split(_sentence, @"[=>]+");       // Split left side and right side of the sentence
 
-                foreach (string s in _left.Split("&"))
-                {
-                    _symbols.Add(s);
-                    _count++;
-                }
+                    _left = side[0];
+                    _right = side[1];
+
+                        foreach (string s in _left.Split("&"))
+                        {
+                            _symbols.Add(s);
+                            _count++;
+                        }
+                    
+
+                    _symbols.Add(_right);
                 
-                _symbols.Add(_right);
             }
         }
+
+        public bool IsAtomic { get { return _isAtomic; } }
         public List<string> getSymbols {  get { return _symbols; } }   
         public string getSentence { get { return _sentence; } }
-        public List<string> getConnective { get { return _connectives; } }
+        public List<string> Connective { get { return _connectives; } }
         public int Count { 
             get { return _count;}
             set { _count = value; }

@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\OneDrive\\Tài liệu\\GitHub\\Inference-Engine\\InferenceEngine.csproj",
       "projectName": "InferenceEngine",
-      "projectPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\obj\\",
+      "projectPath": "C:\\Users\\ASUS\\OneDrive\\Tài liệu\\GitHub\\Inference-Engine\\InferenceEngine.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ASUS\\OneDrive\\Tài liệu\\GitHub\\Inference-Engine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

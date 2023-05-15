@@ -18,7 +18,7 @@ namespace InferenceEngine
             _symbols = new List<string>();
             _sentences = new List<Sentence>();
         }
-        public void ReadFile(string fileName)
+        public void ReadFile(string fileName) 
         {
             FileStream stream = new FileStream(fileName, FileMode.Open);
             StreamReader reader = new StreamReader(stream);
@@ -34,12 +34,25 @@ namespace InferenceEngine
                 kB = Regex.Replace(kB, @"\s+", ""); // Remove all whitespaces
                 kB = kB.TrimEnd(';');
 
+                //Console.WriteLine(kB);
+
                 string[] clauses = kB.Split(";");   // Get each clause
+
+                foreach (string clause in clauses)
+                {
+                    //Console.WriteLine(clause);
+
+                    ExpressionParser parser = new ExpressionParser();
+                    Console.WriteLine(clause);
+                    parser.Parse(clause);
+                }
 
                 for (int i = 0; i < clauses.Length; i++)
                 {
                     Sentence temp = new Sentence(clauses[i]);
-                    _sentences.Add(temp);
+                    _sentences.Add(temp); //should I implement the parser here, or how can I evaluate every single clause?/
+                    //parser goal: evaluate each sentence
+                    //then KB = sentence 1 AND sentence 2 ... sentence N
 
                     // Take symbol(s) from each sentenct and append to the _symbols list
                     foreach (string s in temp.getSymbols)
@@ -50,16 +63,16 @@ namespace InferenceEngine
 
                 _symbols = _symbols.Distinct().ToList(); // Remove all duplicated symbols
 
-                //// Check the symbols list
-                //foreach(string s in _symbols)
+                //Check the symbols list
+                //foreach (string s in _symbols)
                 //{
-                //    Console.WriteLine(s);
+                   // Console.WriteLine(s);
                 //}
 
-                //// Check the sentence list
+                // Check the sentence list
                 //foreach (Sentence s in _sentences)
                 //{
-                //    Console.WriteLine(s.getSentence);       
+                //    Console.WriteLine(s.getSentence);
                 //}
             }
             catch (Exception ex)
@@ -70,6 +83,6 @@ namespace InferenceEngine
         }
         public List<Sentence> getSentences { get { return _sentences; } } 
         public List<string> getSymbols { get { return _symbols; } }
-        public Sentence getQuery { get { return _query; } }
+        public Sentence Query { get { return _query; } }
     }
 }

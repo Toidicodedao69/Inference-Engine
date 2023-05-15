@@ -9,8 +9,13 @@ namespace InferenceEngine
             KnowledgeBase kB = new KnowledgeBase();
             kB.ReadFile(args[0]);
 
-            SearchAlgorithm FC = new ForwardChaining(kB);
-            FC.Entails();
+            //Algorithm FC = new ForwardChaining(kB);
+            //FC.Entails();
+            //FC.PrintResult();
+
+            //Algorithm TT = new TruthTable(kB);
+            //TT.Entails();
+            //TT.PrintResult();
         }
 
     }

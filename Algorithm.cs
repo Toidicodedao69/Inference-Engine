@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace InferenceEngine
 {
-    public abstract class SearchAlgorithm
+    public abstract class Algorithm
     {
-        public abstract void Entails();
+        public abstract bool Entails();
+
+        public abstract void PrintResult();
     }
 }

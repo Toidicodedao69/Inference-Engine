@@ -7,34 +7,35 @@ using System.Threading.Tasks;
 
 namespace InferenceEngine
 {
-    public class ForwardChaining : SearchAlgorithm
+    public class ForwardChaining : Algorithm
     {
         private Queue<string> _symbols;
         private KnowledgeBase _KB;
-        public ForwardChaining(KnowledgeBase kB) 
+        private List<String> _solution;
+        public ForwardChaining(KnowledgeBase kB)
         {
             _KB = kB;
             _symbols = new Queue<string>();
-            foreach(Sentence s in _KB.getSentences)
+            foreach (Sentence s in _KB.getSentences)
             {
                 if (s.getSentence.Length <= 2)
                 {
                     _symbols.Enqueue(s.getSentence);
                 }
             }
+            _solution = new List<string>();
         }
-        public override void Entails()
+        public override bool Entails()
         {
             string symbol;
-            List<string> solution = new List<string>();
             while (_symbols.Count > 0)
             {
                 symbol = _symbols.Dequeue();
-                solution.Add(symbol);
+                _solution.Add(symbol);
 
-                if (solution.Contains(_KB.getQuery.getSentence))
+                if (_solution.Contains(_KB.Query.getSentence))
                 {
-                    break;
+                    return true;
                 }
 
                 foreach (Sentence s in _KB.getSentences)
@@ -52,16 +53,20 @@ namespace InferenceEngine
                     }
                 }
             }
+            return false;
+        }
 
-            if (solution.Contains(_KB.getQuery.getSentence))
+        public override void PrintResult()
+        {
+            if (Entails())
             {
                 Console.Write("YES: ");
 
-                foreach (string s in solution)
+                foreach (string s in _solution)
                 {
                     Console.Write(s + " ");
                 }
-                
+
             }
             else
             {

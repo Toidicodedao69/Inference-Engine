@@ -28,3 +28,18 @@ E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intell
 E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Debug\net6.0\InferenceEngine.pdb
 E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Debug\net6.0\InferenceEngine.genruntimeconfig.cache
 E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Debug\net6.0\ref\InferenceEngine.dll
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\bin\Debug\net6.0\InferenceEngine.exe
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\bin\Debug\net6.0\InferenceEngine.deps.json
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\bin\Debug\net6.0\InferenceEngine.runtimeconfig.json
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\bin\Debug\net6.0\InferenceEngine.dll
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\bin\Debug\net6.0\InferenceEngine.pdb
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.csproj.AssemblyReference.cache
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.AssemblyInfoInputs.cache
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.AssemblyInfo.cs
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.dll
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\refint\InferenceEngine.dll
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.pdb
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\InferenceEngine.genruntimeconfig.cache
+C:\Users\ASUS\OneDrive\Tài liệu\GitHub\Inference-Engine\obj\Debug\net6.0\ref\InferenceEngine.dll
