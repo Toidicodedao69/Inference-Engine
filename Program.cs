@@ -7,8 +7,9 @@ namespace InferenceEngine
         public static void Main(string[] args)
         {
             KnowledgeBase kB = new KnowledgeBase();
-            //kB.ReadFile(args[0]);
-            kB.ReadFile("small_test.txt");
+            kB.ReadFile(args[0]);
+            kB.ReadFile("test_genericKB.txt");
+            //kB.ReadFile("small_test.txt");
 
             //Algorithm FC = new ForwardChaining(kB);
             //FC.Entails();

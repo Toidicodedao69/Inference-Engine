@@ -16,7 +16,6 @@ namespace InferenceEngine
         private string _sentence;
         private string _left, _right;
         private int _count;
-        private bool _atomic;
         private Dictionary<string, int> _connectives; //Connective(string connective, int priority <precedence>)
 
         public Sentence(string sentence)
@@ -25,7 +24,6 @@ namespace InferenceEngine
             _sentence = sentence;
             _left = _right = "";
             _count = 0;
-            _atomic = false;
             _connectives = new Dictionary<string, int>() { { "&", 3 }, { "=>", 2 }, { "~", 4 }, { "||", 3 }, { "<=>", 2 } };
             Initialize();
         }
@@ -131,8 +129,6 @@ namespace InferenceEngine
 
 
         }
-        public bool IsAtomic { get { return _atomic; } }
-
         public List<string> getSymbols {  get { return _symbols; } }   
         public string getSentence { get { return _sentence; } }
         public int Count { 

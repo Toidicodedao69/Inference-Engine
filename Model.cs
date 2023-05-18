@@ -21,7 +21,7 @@ namespace InferenceEngine
             _operands = new Stack<bool>();
         }
 
-        public Dictionary<string, bool> ModelSet { get { return _evals; } }
+        public Dictionary<string, bool> ModelSet { get { return _evals; } set { _evals = value; } }
 
         public Model Extend(string symbol, bool boolValue) //extend the current model set 
         {
@@ -106,7 +106,7 @@ namespace InferenceEngine
                         operandB = _operands.Pop();
                         //Console.WriteLine("Popped: " + operandB.Symbol);
 
-                        string smallSentence = operandB + " " + parsing + " " + operandA;
+                        string smallSentence = operandB + parsing + operandA;
                         //Console.WriteLine(smallSentence);
                         Console.WriteLine("Executed sentence: " + smallSentence);
 

@@ -59,6 +59,7 @@ namespace InferenceEngine
             }
             else
             {
+                Console.WriteLine("OK");
                 //string symbols1 = "";
                 //foreach (string symbol in symbols)
                 //{
@@ -67,9 +68,9 @@ namespace InferenceEngine
                 //Console.WriteLine("Check All symbols: " + symbols1);
 
                 string first = symbols.First(); //take out the first symbol
-                symbols.RemoveAt(0);
                 List<string> rest = new List<string>();
                 rest.AddRange(symbols); //store the rest of the symbols
+                rest.Remove(rest.First());
 
                 //string symbols2 = "";
                 //foreach (string symbol in symbols)
@@ -82,17 +83,24 @@ namespace InferenceEngine
                 Model modelT = new Model();
                 Model modelF = new Model();
 
-                modelT = modelF = model;
+                modelT.ModelSet = modelF.ModelSet = model.ModelSet;
 
                 //assign the new model to be the input model value plus the new symbol with either True/False bool value
-                modelT.Extend(first, true);
+                //modelT.Extend(first, true);
+                CheckAll(KB, query, rest, modelT.Extend(first, true));
                 Console.WriteLine("True branch executed");
-                CheckAll(KB, query, rest, modelT);
-                modelF.Extend(first, false);
+                foreach (var i in modelT.ModelSet)
+                {
+                    Console.WriteLine(i.Key + " " + i.Value);
+                }
+                //modelF.Extend(first, false);
+                CheckAll(KB, query, rest, modelF.Extend(first, false));
                 Console.WriteLine("False branch executed");
-                CheckAll(KB, query, rest, modelF);
+                foreach (var i in modelF.ModelSet)
+                {
+                    Console.WriteLine(i.Key + " " + i.Value);
+                }
 
-                //recursively call CheckAll
                 //recursively call CheckAll
                 //CheckAll(KB, query, rest, modelT);
                 //CheckAll(KB, query, rest, modelF);
