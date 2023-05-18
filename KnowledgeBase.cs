@@ -29,7 +29,10 @@ namespace InferenceEngine
                 string kB = reader.ReadLine(); // This line contains all sentences/clauses
 
                 reader.ReadLine();  // "ASK" keyword
-                _query = new Sentence(reader.ReadLine()); // The query 
+                string query = reader.ReadLine();
+
+                query = Regex.Replace(query, @"\s+", ""); // Remove all whitespaces
+                _query = new Sentence(query); // The query 
 
                 kB = Regex.Replace(kB, @"\s+", ""); // Remove all whitespaces
                 kB = kB.TrimEnd(';');
@@ -49,9 +52,7 @@ namespace InferenceEngine
                 for (int i = 0; i < clauses.Length; i++)
                 {
                     Sentence temp = new Sentence(clauses[i]);
-                    _sentences.Add(temp); //should I implement the parser here, or how can I evaluate every single clause?/
-                    //parser goal: evaluate each sentence
-                    //then KB = sentence 1 AND sentence 2 ... sentence N
+                    _sentences.Add(temp); 
 
                     // Take symbol(s) from each sentenct and append to the _symbols list
                     foreach (string s in temp.getSymbols)

@@ -35,7 +35,6 @@ namespace InferenceEngine
 
                 if (_solution.Contains(_KB.Query.getSentence))
                 {
-                    //return true;
                     break;
                 }
 
@@ -54,7 +53,6 @@ namespace InferenceEngine
                     }
                 }
             }
-            //return false;
         }
 
         public override void PrintResult()

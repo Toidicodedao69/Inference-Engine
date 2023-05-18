@@ -33,14 +33,14 @@ namespace InferenceEngine
         {
             bool final = true;
             bool result = false;
-            string final2 = "KB = True";
+           // string final2 = "KB = True";
             foreach (Sentence s in KB.getSentences)
             {
                 result = PL_True(s);
                 final = final && result; //evaluate all KB sentences, if all true then true;
-                final2 += "&" + result.ToString();
+                //final2 += "&" + result.ToString();
             }
-            Console.WriteLine(final2);
+            //Console.WriteLine(final2);
             return final;
         }
 
@@ -49,13 +49,13 @@ namespace InferenceEngine
             ExpressionParser parser = new ExpressionParser();
 
             string postfix = parser.Parse(sentence.getSentence);
-            //Console.WriteLine("Postfix:" + postfix);
+           // Console.WriteLine("Postfix:" + postfix);
 
-            string symbols1 = "";
-            foreach (var m in _evals)
-            {
-                symbols1 += " [" + m.Key + ", " + m.Value + "]";
-            }
+            //string symbols1 = "";
+            //foreach (var m in _evals)
+            //{
+            //    symbols1 += " [" + m.Key + ", " + m.Value + "]";
+            //}
 
             //Console.WriteLine("Model symbols while evaluating PLTrue: " + symbols1);
 
@@ -82,7 +82,7 @@ namespace InferenceEngine
                             if (_evals.ContainsKey(parsing))
                             {
                                 _operands.Push(_evals[parsing]); //push the scanned symbol onto the stack
-                                Console.WriteLine("Pushed [{0}, {1}]", parsing, _evals[parsing]);
+                                //Console.WriteLine("Pushed [{0}, {1}]", parsing, _evals[parsing]);
                                 //Console.WriteLine("Pushed: " + e.Symbol + " Value: " + e.BoolValue);
                                 //break; //break out of the foreach loop
                             }
@@ -90,29 +90,47 @@ namespace InferenceEngine
                     else //connectives
                     {
                         parsing = postfix[i].ToString();
-                        if (i <= postfix.Length - 2 && !pattern.IsMatch(postfix[i + 1].ToString())) //if 2 char connective
+                        if (parser.IsConnective(postfix[i].ToString()))
                         {
-                            parsing += postfix[i + 1].ToString();
-                            if (i <= postfix.Length - 3 && !pattern.IsMatch(postfix[i + 2].ToString())) //3 char connective
-                            {
-                                parsing += postfix[i + 2].ToString();
-                                i = i + 2;
-                            }
-                            i = i + 1;
+                            parsing = postfix[i].ToString();
                         }
 
-                        operandA = _operands.Pop();
-                        //Console.WriteLine("Popped: " + operandA.Symbol);
-                        operandB = _operands.Pop();
-                        //Console.WriteLine("Popped: " + operandB.Symbol);
+                        if (i <= postfix.Length - 2 && !pattern.IsMatch(postfix[i + 1].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString())) //if 2 char connective
+                        {
+                            parsing += postfix[i + 1].ToString();
+                            i = i + 1;  
+                        }
 
-                        string smallSentence = operandB + parsing + operandA;
-                        //Console.WriteLine(smallSentence);
-                        Console.WriteLine("Executed sentence: " + smallSentence);
+                        if (i <= postfix.Length - 3 && !pattern.IsMatch(postfix[i + 2].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString() + postfix[i + 2].ToString())) //3 char connective
+                        {
+                            parsing += postfix[i + 1].ToString() + postfix[i + 2].ToString();
+                            i = i + 2;
+                        }
 
-                        smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
-                        _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
-                        Console.WriteLine("Pushed result: " + smallSentenceE);
+                        if (parsing == "~")
+                        {
+                            operandA = _operands.Pop();
+                            operandA = !operandA;
+                            _operands.Push(operandA);
+                           // Console.WriteLine("Executed sentence: ~" + !operandA);
+                            //Console.WriteLine("Pushed result: " + operandA);
+                    }
+                        else
+                        {
+                            operandA = _operands.Pop();
+                            //Console.WriteLine("Popped: " + operandA.Symbol);
+                            operandB = _operands.Pop();
+                            //Console.WriteLine("Popped: " + operandB.Symbol);
+
+                            string smallSentence = operandB + parsing + operandA;
+                            //Console.WriteLine(smallSentence);
+                           // Console.WriteLine("Executed sentence: " + smallSentence);
+
+                            smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
+
+                            _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
+                           // Console.WriteLine("Pushed result: " + smallSentenceE);
+                        }
                     }
                 }
 
@@ -139,14 +157,14 @@ namespace InferenceEngine
             {
                 return (Implication(a, b)) && (Implication(b, a));
             }
-            else if (connective == "~")
-            {
-                return !b;
-            }
+            //else if (connective == "~")
+            //{
+            //    return !b;
+            //}
             else
             {
                 Console.WriteLine("Error.");
-                return false;
+                throw new InvalidOperationException("Connective does not exists.");
             }
         }
 

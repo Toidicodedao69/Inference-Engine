@@ -57,7 +57,7 @@ namespace InferenceEngine
                     else //connectives
                     {
                         parsing = expression[i].ToString();
-                        if (_connectives.ContainsKey(expression[i].ToString())) //1 character connective - &, ~
+                        if (IsConnective(expression[i].ToString())) //1 character connective - &, ~
                         {
                             parsing = expression[i].ToString();
                         }
@@ -68,7 +68,7 @@ namespace InferenceEngine
                                 if (!pattern.IsMatch(expression[i + 1].ToString()))
                                 {
                                     parsing += expression[i + 1].ToString();
-                                    if (_connectives.ContainsKey(parsing)) //2 char connective
+                                    if (IsConnective(parsing)) //2 char connective
                                     {
                                         i = i + 1;
                                     }
@@ -76,10 +76,10 @@ namespace InferenceEngine
                                     {
                                         if (i <= expression.Length - 3)
                                         {
-                                            if (!pattern.IsMatch(expression[i + 2].ToString())) //3 char connective
+                                            if (!pattern.IsMatch(expression[i + 2].ToString()) && !IsConnective(expression[i+2].ToString())) //3 char connective
                                             {
                                                 parsing += expression[i + 2].ToString();
-                                                if (_connectives.ContainsKey(parsing))
+                                                if (IsConnective(parsing))
                                                 {
                                                     i = i + 2;
                                                 }
@@ -109,5 +109,16 @@ namespace InferenceEngine
             //Console.WriteLine(result);
             return result;
         }
+
+        public bool IsConnective(string input)
+        {
+            if (_connectives.ContainsKey(input))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }
