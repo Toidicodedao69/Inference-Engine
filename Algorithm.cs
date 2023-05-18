@@ -8,7 +8,7 @@ namespace InferenceEngine
 {
     public abstract class Algorithm
     {
-        public abstract bool Entails();
+        public abstract void Entails();
 
         public abstract void PrintResult();
     }

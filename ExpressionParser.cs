@@ -18,17 +18,14 @@ namespace InferenceEngine
             _connectives = new Dictionary<string, int>() { { "&", 3 }, { "=>", 2 }, { "~", 4 }, { "||", 3 }, { "<=>", 2 } };
         }
 
-        public void Parse(string expression)
+        public string Parse(string expression)             //infix to postfix parser
         {
-            //should this function return the bool value of the expression straght away
-
-            //parsing an expression, how
-            //infix to postfix parser
-            string parsing;
+            string result = "";
             Regex pattern = new Regex("[a-zA-Z0-9]");
 
             for (int i = 0; i < expression.Length; i++) //acquiring the symbol stack
             {
+                string parsing;
                 if (pattern.IsMatch(expression[i].ToString()))
                 {
                     parsing = expression[i].ToString(); //1 char symbol
@@ -40,66 +37,77 @@ namespace InferenceEngine
                             i = i + 1;
                         }
                     }
-                    _parseStack.Push(parsing);
+                    result += parsing;
                 }
-                else //not alphanumeric => connective
+                else //not alphanumeric => connective or maybe brackets () //when to push onto the stack?
                 {
-                    parsing = expression[i].ToString();
-                    if (_connectives.ContainsKey(expression[i].ToString())) //1 character connective
-                    { 
+                    if (expression[i].ToString() == "(") //if it's an open bracket, push to stack
+                    {
+                        parsing = expression[i].ToString();
                         _parseStack.Push(parsing);
                     }
-                    else //2 character connective or 3 char connective
+                    else if (expression[i].ToString() == ")")
                     {
-                        if (i <= expression.Length - 2)
+                        while (_parseStack.Peek() != "(")
                         {
-                            if (!pattern.IsMatch(expression[i + 1].ToString()))
+                            result += _parseStack.Pop();  //pop until the open bracket is met
+                        }
+                        _parseStack.Pop();
+                    }
+                    else //connectives
+                    {
+                        parsing = expression[i].ToString();
+                        if (_connectives.ContainsKey(expression[i].ToString())) //1 character connective - &, ~
+                        {
+                            parsing = expression[i].ToString();
+                        }
+                        else//2 character connective or 3 char connective
+                        {
+                            if (i <= expression.Length - 2)
                             {
-                                parsing += expression[i + 1].ToString();
-                                if (_connectives.ContainsKey(parsing)) //2 char connective
+                                if (!pattern.IsMatch(expression[i + 1].ToString()))
                                 {
-                                    i = i + 1;
-                                    _parseStack.Push(parsing);
-                                }
-                                else
-                                {
-                                    if (i <= expression.Length - 1)
+                                    parsing += expression[i + 1].ToString();
+                                    if (_connectives.ContainsKey(parsing)) //2 char connective
                                     {
-                                        if (!pattern.IsMatch(expression[i + 2].ToString())) //3 char connective
+                                        i = i + 1;
+                                    }
+                                    else
+                                    {
+                                        if (i <= expression.Length - 3)
                                         {
-                                            parsing += expression[i + 2].ToString();
-                                            if (_connectives.ContainsKey(parsing))
+                                            if (!pattern.IsMatch(expression[i + 2].ToString())) //3 char connective
                                             {
-                                                i = i + 2;
-                                                _parseStack.Push(parsing);
+                                                parsing += expression[i + 2].ToString();
+                                                if (_connectives.ContainsKey(parsing))
+                                                {
+                                                    i = i + 2;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        //operator have been stored in parsing
+                        while (_parseStack.Count > 0 && _parseStack.Peek() != "(" && _connectives[_parseStack.Peek()] >= _connectives[parsing])
+                        {
+                            result += _parseStack.Pop();
+                        }
+                        _parseStack.Push(parsing);
+
                     }
                 }
-                parsing = "";
+                parsing = ""; //reset the string
             }
 
-            //evaluation with the stack?
-
-            while (_parseStack.Count > 0)
+            while (_parseStack.Count != 0)
             {
-                string current = _parseStack.Pop();
-                Console.WriteLine(current);
-                if (!_connectives.ContainsKey(current)) //not a connective
-                {
-
-                }
-
+                result += _parseStack.Pop();
             }
+
+            //Console.WriteLine(result);
+            return result;
         }
     }
-
-       // private bool IsConnective(string connective)
-        //{
-            
-       // }
 }

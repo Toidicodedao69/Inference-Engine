@@ -25,7 +25,7 @@ namespace InferenceEngine
             }
             _solution = new List<string>();
         }
-        public override bool Entails()
+        public override void Entails()
         {
             string symbol;
             while (_symbols.Count > 0)
@@ -35,7 +35,8 @@ namespace InferenceEngine
 
                 if (_solution.Contains(_KB.Query.getSentence))
                 {
-                    return true;
+                    //return true;
+                    break;
                 }
 
                 foreach (Sentence s in _KB.getSentences)
@@ -53,12 +54,12 @@ namespace InferenceEngine
                     }
                 }
             }
-            return false;
+            //return false;
         }
 
         public override void PrintResult()
         {
-            if (Entails())
+            if (_solution.Contains(_KB.Query.getSentence))
             {
                 Console.Write("YES: ");
 

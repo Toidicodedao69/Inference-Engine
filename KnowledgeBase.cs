@@ -38,14 +38,13 @@ namespace InferenceEngine
 
                 string[] clauses = kB.Split(";");   // Get each clause
 
-                foreach (string clause in clauses)
-                {
-                    //Console.WriteLine(clause);
-
-                    ExpressionParser parser = new ExpressionParser();
-                    Console.WriteLine(clause);
-                    parser.Parse(clause);
-                }
+                //foreach (string clause in clauses)
+                //{
+                //    //test clause and parser
+                //    ExpressionParser parser = new ExpressionParser();
+                //    Console.WriteLine(clause);
+                //    Console.WriteLine(parser.Parse(clause));
+                //}
 
                 for (int i = 0; i < clauses.Length; i++)
                 {
