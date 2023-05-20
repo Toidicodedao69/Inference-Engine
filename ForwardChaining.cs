@@ -42,12 +42,13 @@ namespace InferenceEngine
                 {
                     if (s.Count > 0)
                     {
-                        if (s.getLeft.Contains(symbol))
+                        if (s.getLeft().Contains(symbol))
                         {
                             s.Count--;
+
                             if (s.Count == 0)
                             {
-                                _symbols.Enqueue(s.getRight);
+                                _symbols.Enqueue(s.getRight());
                             }
                         }
                     }

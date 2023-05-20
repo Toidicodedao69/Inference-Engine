@@ -12,17 +12,16 @@ namespace InferenceEngine
     // A single symbol is also a sentence
     public class Sentence
     {
-        private List<string> _symbols;
+        private List<string> _symbols, _leftSymbols;
         private string _sentence;
-        private string _left, _right;
         private int _count;
         private Dictionary<string, int> _connectives; //Connective(string connective, int priority <precedence>)
 
         public Sentence(string sentence)
         {
             _symbols = new List<string>();
+            _leftSymbols = new List<string>();
             _sentence = sentence;
-            _left = _right = "";
             _count = 0;
             _connectives = new Dictionary<string, int>() { { "&", 3 }, { "=>", 2 }, { "~", 4 }, { "||", 3 }, { "<=>", 2 } };
             Initialize();
@@ -32,29 +31,6 @@ namespace InferenceEngine
         // This method is called inside the constructor
         public void Initialize()
         {
-            ////horn - remember to fix
-            //if (_sentence.Length <= 2) // A symbol - later we will have <=> which will have the length of 3 lol
-            //{
-            //    _symbols.Add(_sentence);
-            //    _atomic = true;
-
-            //}
-            //else
-            //{
-            //    string[] side = Regex.Split(_sentence, @"[=>]+");       // Split left side and right side of the sentence
-
-            //    _left = side[0];
-            //    _right = side[1];
-
-            //    foreach (string s in _left.Split("&"))
-            //    {
-            //        _symbols.Add(s);
-            //        _count++;
-            //    }
-            //    _symbols.Add(_right);
-
-            //}
-
             //general knowledge
             string result = "";
             Regex pattern = new Regex("[a-zA-Z0-9]");
@@ -74,7 +50,9 @@ namespace InferenceEngine
                             i = i + 1;
                         }
                     }
-                    _symbols.Add(parsing); //symbol
+                    //symbol
+                    _symbols.Add(parsing);
+                    _leftSymbols.Add(parsing);
                 }
                 else 
                 {
@@ -127,15 +105,30 @@ namespace InferenceEngine
                 parsing = ""; //reset the string
             }
 
+            // Remove the conclusion symbol from the returned list
+            _leftSymbols.RemoveAt(_leftSymbols.Count - 1);
 
+            _count = _leftSymbols.Count;
         }
         public List<string> getSymbols {  get { return _symbols; } }   
         public string getSentence { get { return _sentence; } }
-        public int Count { 
-            get { return _count;}
+        public int Count 
+        { 
+            get { return _count; }
             set { _count = value; }
         }
-        public string getLeft { get { return _left; } }
-        public string getRight { get { return _right; } }   
+
+        // This 2 methods are used for Horn Knowledge Base which contains sentence in the following form: P1 & P2 & ... & Pn => Q
+
+        // getleft returns the List of all symbols on the left before "=>" connective, which is P1, P2, ...,Pn
+        // getRight returns the conclusion symbol on the right after "=>" connective, which is Q
+        public List<string> getLeft()
+        {
+            return _leftSymbols;
+        }
+        public string getRight()
+        { 
+            return _symbols.Last();
+        }   
     }
 }
