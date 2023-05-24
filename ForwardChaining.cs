@@ -9,13 +9,15 @@ namespace InferenceEngine
 {
     public class ForwardChaining : Algorithm
     {
-        private Queue<string> _symbols;
+        private Queue<string> _symbols;     // List of already true/inferred symbols
         private KnowledgeBase _KB;
-        private List<String> _solution;
+        private List<String> _solution;     // List contains the solution path 
         public ForwardChaining(KnowledgeBase kB)
         {
             _KB = kB;
             _symbols = new Queue<string>();
+
+            // Get already true symbols in the kB
             foreach (Sentence s in _KB.getSentences)
             {
                 if (s.getSentence.Length <= 2)

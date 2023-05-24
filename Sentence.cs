@@ -108,6 +108,11 @@ namespace InferenceEngine
             // Remove the conclusion symbol from the returned list
             _leftSymbols.RemoveAt(_leftSymbols.Count - 1);
 
+            // Remove all duplicated symbols on the left side 
+            // For example: "a&a&a => b"    -> The left symbol is only "a"    
+            _leftSymbols = _leftSymbols.Distinct().ToList();
+
+            // Initialize _count 
             _count = _leftSymbols.Count;
         }
         public List<string> getSymbols {  get { return _symbols; } }   
