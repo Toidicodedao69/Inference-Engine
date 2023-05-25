@@ -23,6 +23,14 @@ namespace InferenceEngine
 
         public override void Entails()
         {
+            foreach(string symbol in _KB.Query.getSymbols)
+            {
+                // If query is not existed in the KB, print "NO" and terminate the program
+                if (!_KB.getSymbols.Contains(symbol))
+                {
+                    return;
+                }
+            }
             _entails = CheckAll(_KB, _KB.Query, _KB.getSymbols, new Model());
         }
 

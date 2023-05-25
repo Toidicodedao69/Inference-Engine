@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -15,7 +16,6 @@ namespace InferenceEngine
         private List<string> _symbols, _leftSymbols;
         private string _sentence;
         private int _count;
-        private Dictionary<string, int> _connectives; //Connective(string connective, int priority <precedence>)
 
         public Sentence(string sentence)
         {
@@ -23,86 +23,41 @@ namespace InferenceEngine
             _leftSymbols = new List<string>();
             _sentence = sentence;
             _count = 0;
-            _connectives = new Dictionary<string, int>() { { "&", 3 }, { "=>", 2 }, { "~", 4 }, { "||", 3 }, { "<=>", 2 } };
             Initialize();
         }
 
-        // Extract symbols and connectives from the sentence
+        // Extract symbols from the sentence
         // This method is called inside the constructor
         public void Initialize()
         {
-            //general knowledge
-            string result = "";
+            string parsing = "";
             Regex pattern = new Regex("[a-zA-Z0-9]");
-            Stack<string> connectives = new Stack<string>();
 
             for (int i = 0; i < _sentence.Length; i++) 
             {
-                string parsing;
                 if (pattern.IsMatch(_sentence[i].ToString()))
                 {
-                    parsing = _sentence[i].ToString(); //1 char symbol
-                    if (i <= _sentence.Length - 2)
+                    parsing += _sentence[i].ToString();
+
+                    // When it is at the end of sentence
+                    if (i == _sentence.Length - 1)
                     {
-                        if (pattern.IsMatch(_sentence[i + 1].ToString())) //2nd char of the symbol
-                        {
-                            parsing += _sentence[i + 1].ToString(); //symbol with number
-                            i = i + 1;
-                        }
+                        _symbols.Add(parsing);
+                        _leftSymbols.Add(parsing);
                     }
-                    //symbol
-                    _symbols.Add(parsing);
-                    _leftSymbols.Add(parsing);
                 }
-                else 
+                else
                 {
-                    if (_sentence[i].ToString() == "(") //if it's an open bracket, push to stack
+                    // Pass in symbols when it meets special character
+                    if (parsing != "")
                     {
-                        parsing = _sentence[i].ToString();
-                    }
-                    else if (_sentence[i].ToString() == ")")
-                    {
-                        parsing = _sentence[i].ToString();
-                    }
-                    else //connectives
-                    {
-                        parsing = _sentence[i].ToString();
-                        if (_connectives.ContainsKey(_sentence[i].ToString())) //1 character connective - &, ~
-                        {
-                            parsing = _sentence[i].ToString();
-                        }
-                        else//2 character connective or 3 char connective
-                        {
-                            if (i <= _sentence.Length - 2)
-                            {
-                                if (!pattern.IsMatch(_sentence[i + 1].ToString()))
-                                {
-                                    parsing += _sentence[i + 1].ToString();
-                                    if (_connectives.ContainsKey(parsing)) //2 char connective - =>, ||
-                                    {
-                                        i = i + 1;
-                                    }
-                                    else
-                                    {
-                                        if (i <= _sentence.Length - 3)
-                                        {
-                                            if (!pattern.IsMatch(_sentence[i + 2].ToString())) //3 char connective
-                                            {
-                                                parsing += _sentence[i + 2].ToString();
-                                                if (_connectives.ContainsKey(parsing))
-                                                {
-                                                    i = i + 2;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        _symbols.Add(parsing);
+                        _leftSymbols.Add(parsing);
+
+                        // Reset the parsing string
+                        parsing = "";
                     }
                 }
-                result = parsing;
-                parsing = ""; //reset the string
             }
 
             // Remove the conclusion symbol from the returned list

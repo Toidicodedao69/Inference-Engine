@@ -37,17 +37,7 @@ namespace InferenceEngine
                 kB = Regex.Replace(kB, @"\s+", ""); // Remove all whitespaces
                 kB = kB.TrimEnd(';');
 
-                //Console.WriteLine(kB);
-
                 string[] clauses = kB.Split(";");   // Get each clause
-
-                //foreach (string clause in clauses)
-                //{
-                //    //test clause and parser
-                //    ExpressionParser parser = new ExpressionParser();
-                //    Console.WriteLine(clause);
-                //    Console.WriteLine(parser.Parse(clause));
-                //}
 
                 for (int i = 0; i < clauses.Length; i++)
                 {
@@ -62,18 +52,6 @@ namespace InferenceEngine
                 }
 
                 _symbols = _symbols.Distinct().ToList(); // Remove all duplicated symbols
-
-                //Check the symbols list
-                //foreach (string s in _symbols)
-                //{
-                   // Console.WriteLine(s);
-                //}
-
-                // Check the sentence list
-                //foreach (Sentence s in _sentences)
-                //{
-                //    Console.WriteLine(s.getSentence);
-                //}
             }
             catch (Exception ex)
             {
