@@ -9,14 +9,11 @@ namespace InferenceEngine
             KnowledgeBase kB = new KnowledgeBase();
             Algorithm? algorithm = null;
 
-            kB.ReadFile("tautology.txt");
-            //kB.ReadFile("test_HornKB.txt");
-            //kB.ReadFile("test_genericKB_1.txt");
-            //kB.ReadFile("test_genericKB.txt");
-            //kB.ReadFile("small_test.txt");
+            // Read file
+            kB.ReadFile(args[1]);
 
             // Read method
-            switch ("tt")
+            switch (args[0])
             {
                 case "fc":
                     algorithm = new ForwardChaining(kB);
