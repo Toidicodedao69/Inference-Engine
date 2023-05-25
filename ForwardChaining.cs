@@ -35,23 +35,20 @@ namespace InferenceEngine
                 symbol = _symbols.Dequeue();
                 _solution.Add(symbol);
 
-                if (_solution.Contains(_KB.Query.getSentence))
-                {
-                    break;
-                }
-
                 foreach (Sentence s in _KB.getSentences)
                 {
-                    if (s.Count > 0)
+                    if (s.Count > 0 && s.getLeft().Contains(symbol))
                     {
-                        if (s.getLeft().Contains(symbol))
-                        {
-                            s.Count--;
+                        s.Count--;
 
-                            if (s.Count == 0)
+                        if (s.Count == 0)
+                        {
+                            if (s.getRight() == _KB.Query.getSentence)
                             {
-                                _symbols.Enqueue(s.getRight());
+                                _solution.Add(s.getRight());
+                                break;
                             }
+                            _symbols.Enqueue(s.getRight());
                         }
                     }
                 }

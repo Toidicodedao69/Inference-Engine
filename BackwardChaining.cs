@@ -36,21 +36,21 @@ namespace InferenceEngine
         {
             _subgoals.Enqueue(_KB.Query.getSentence);
 
-            string lSymbol;
+            string symbol;
 
             while (_subgoals.Count > 0)
             {
-                 lSymbol= _subgoals.Dequeue();
+                 symbol= _subgoals.Dequeue();
 
-                _closed_subgoals.Enqueue(lSymbol);
+                _closed_subgoals.Enqueue(symbol);
 
-                if (!_facts.Contains(lSymbol))
+                if (!_facts.Contains(symbol))
                 {
                     List<Sentence> sub_goal_sentences = new List<Sentence>();
 
                     foreach (Sentence s in _KB.getSentences)
                     {
-                        if (s.getRight() == lSymbol)
+                        if (s.getRight() == symbol)
                         {
                             sub_goal_sentences.Add(s);
                         }
@@ -59,6 +59,7 @@ namespace InferenceEngine
                     if (sub_goal_sentences.Count == 0)
                     {
                         _entails = false;
+                        break;
                     }
                     else
                     {
