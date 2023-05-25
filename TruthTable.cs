@@ -11,13 +11,13 @@ namespace InferenceEngine
     {
         private KnowledgeBase _KB;
         private int _numOfModels;
-        private int _count;
+        //private int _count;
         private bool _entails;
         public TruthTable(KnowledgeBase KB)
         {
             _KB = KB;
             _numOfModels = 0;
-            _count = 0;
+            //_count = 0;
             _entails = false;
         }
 
@@ -46,7 +46,7 @@ namespace InferenceEngine
             {
                 //if PL - TRUE? (KB, model) then return PL - TRUE? (α, model)
                 //else return true // when KB is false, always return true
-                _count++;
+                //_count++;
                 //Console.WriteLine("\nChecking if model is true with KB\n");
                 //Console.WriteLine("Count: " + _count);
                 if (model.PL_True(KB))

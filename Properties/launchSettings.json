@@ -2,7 +2,7 @@
   "profiles": {
     "InferenceEngine": {
       "commandName": "Project",
-      "commandLineArgs": "test_HornKB.txt"
+      "commandLineArgs": "tt truthtable_test.txt"
     }
   }
 }

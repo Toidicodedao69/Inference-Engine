@@ -49,7 +49,7 @@ namespace InferenceEngine
             ExpressionParser parser = new ExpressionParser();
 
             string postfix = parser.Parse(sentence.getSentence);
-           // Console.WriteLine("Postfix:" + postfix);
+            //Console.WriteLine("Postfix:" + postfix);
 
             //string symbols1 = "";
             //foreach (var m in _evals)
@@ -111,27 +111,35 @@ namespace InferenceEngine
 
                     if (parsing == "~")
                     {
-                        operandA = _operands.Pop();
-                        operandA = !operandA;
-                        _operands.Push(operandA);
-                        // Console.WriteLine("Executed sentence: ~" + !operandA);
-                        //Console.WriteLine("Pushed result: " + operandA);
+                        if (_operands.Count > 0)
+                        {
+                            operandA = _operands.Pop();
+                            operandA = !operandA;
+                            _operands.Push(operandA);
+                            //Console.WriteLine("Executed sentence: ~" + !operandA);
+                            //Console.WriteLine("Pushed result: " + operandA);
+                        }
+
+                        if (i + 1 < postfix.Length && postfix[i + 1].ToString() == "~")
+                        {
+                            i = i + 1; //skips the symbol
+                        }
                     }
                     else
                     {
                         operandA = _operands.Pop();
-                        //Console.WriteLine("Popped: " + operandA.Symbol);
+                       // Console.WriteLine("Popped: " + operandA);
                         operandB = _operands.Pop();
-                        //Console.WriteLine("Popped: " + operandB.Symbol);
+                        // Console.WriteLine("Popped: " + operandB);
 
-                        string smallSentence = operandB + parsing + operandA;
+                        //string smallSentence = operandB + parsing + operandA;
                         //Console.WriteLine(smallSentence);
-                        // Console.WriteLine("Executed sentence: " + smallSentence);
+                        //Console.WriteLine("Executed sentence: " + smallSentence);
 
                         smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
 
                         _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
-                        // Console.WriteLine("Pushed result: " + smallSentenceE);
+                        //Console.WriteLine("Pushed result: " + smallSentenceE);
                     }
                 }
             }
@@ -159,10 +167,6 @@ namespace InferenceEngine
             {
                 return (Implication(a, b)) && (Implication(b, a));
             }
-            //else if (connective == "~")
-            //{
-            //    return !b;
-            //}
             else
             {
                 Console.WriteLine("Error.");
