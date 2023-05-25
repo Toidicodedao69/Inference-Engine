@@ -20,7 +20,7 @@ namespace InferenceEngine
             // Get already true symbols in the kB
             foreach (Sentence s in _KB.getSentences)
             {
-                if (s.getSentence.Length <= 2)
+                if (s.getSymbols.Count < 2)
                 {
                     _symbols.Enqueue(s.getSentence);
                 }

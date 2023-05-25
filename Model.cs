@@ -65,74 +65,76 @@ namespace InferenceEngine
             bool operandA, operandB, smallSentenceE;
 
             string parsing = "";
-                for (int i = 0; i < postfix.Length; i++)
+
+            for (int i = 0; i < postfix.Length; i++)
+            {
+                if (pattern.IsMatch(postfix[i].ToString())) //extract symbol
                 {
-                    if (pattern.IsMatch(postfix[i].ToString())) //extract symbol
+                    parsing = postfix[i].ToString(); 
+
+                    // Keeps reading symbol until meets a special character
+                    while (i + 1 < postfix.Length && pattern.IsMatch(postfix[i + 1].ToString()))
                     {
-                        parsing = postfix[i].ToString(); //1 char symbol
-                        if (i <= postfix.Length - 2)
-                        {
-                            if (pattern2.IsMatch(postfix[i + 1].ToString())) //2nd char of the symbol
-                            {
-                                parsing += postfix[i + 1].ToString(); //symbol with number
-                                i = i + 1;
-                            }
-                        }
-                        //compare to the existing evals in model
-                            if (_evals.ContainsKey(parsing))
-                            {
-                                _operands.Push(_evals[parsing]); //push the scanned symbol onto the stack
-                                //Console.WriteLine("Pushed [{0}, {1}]", parsing, _evals[parsing]);
-                                //Console.WriteLine("Pushed: " + e.Symbol + " Value: " + e.BoolValue);
-                                //break; //break out of the foreach loop
-                            }
+                        parsing += postfix[i + 1].ToString();
+                        i = i + 1;
                     }
-                    else //connectives
+
+                    //compare to the existing evals in model
+                    if (_evals.ContainsKey(parsing))
                     {
-                        parsing = postfix[i].ToString();
-                        if (parser.IsConnective(postfix[i].ToString()))
-                        {
-                            parsing = postfix[i].ToString();
-                        }
-
-                        if (i <= postfix.Length - 2 && !pattern.IsMatch(postfix[i + 1].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString())) //if 2 char connective
-                        {
-                            parsing += postfix[i + 1].ToString();
-                            i = i + 1;  
-                        }
-
-                        if (i <= postfix.Length - 3 && !pattern.IsMatch(postfix[i + 2].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString() + postfix[i + 2].ToString())) //3 char connective
-                        {
-                            parsing += postfix[i + 1].ToString() + postfix[i + 2].ToString();
-                            i = i + 2;
-                        }
-
-                        if (parsing == "~")
-                        {
-                            operandA = _operands.Pop();
-                            operandA = !operandA;
-                            _operands.Push(operandA);
-                           // Console.WriteLine("Executed sentence: ~" + !operandA);
-                            //Console.WriteLine("Pushed result: " + operandA);
-                    }
-                        else
-                        {
-                            operandA = _operands.Pop();
-                            //Console.WriteLine("Popped: " + operandA.Symbol);
-                            operandB = _operands.Pop();
-                            //Console.WriteLine("Popped: " + operandB.Symbol);
-
-                            string smallSentence = operandB + parsing + operandA;
-                            //Console.WriteLine(smallSentence);
-                           // Console.WriteLine("Executed sentence: " + smallSentence);
-
-                            smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
-
-                            _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
-                           // Console.WriteLine("Pushed result: " + smallSentenceE);
-                        }
+                        _operands.Push(_evals[parsing]); //push the scanned symbol onto the stack
+                        //Console.WriteLine("Pushed [{0}, {1}]", parsing, _evals[parsing]);
+                        //Console.WriteLine("Pushed: " + e.Symbol + " Value: " + e.BoolValue);
+                        //break; //break out of the foreach loop
+                        i++;
                     }
                 }
+                else //connectives
+                {
+                    parsing = postfix[i].ToString();
+                    if (parser.IsConnective(postfix[i].ToString()))
+                    {
+                        parsing = postfix[i].ToString();
+                    }
+
+                    if (i <= postfix.Length - 2 && !pattern.IsMatch(postfix[i + 1].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString())) //if 2 char connective
+                    {
+                        parsing += postfix[i + 1].ToString();
+                        i = i + 1;  
+                    }
+
+                    if (i <= postfix.Length - 3 && !pattern.IsMatch(postfix[i + 2].ToString()) && parser.IsConnective(parsing + postfix[i + 1].ToString() + postfix[i + 2].ToString())) //3 char connective
+                    {
+                        parsing += postfix[i + 1].ToString() + postfix[i + 2].ToString();
+                        i = i + 2;
+                    }
+
+                    if (parsing == "~")
+                    {
+                        operandA = _operands.Pop();
+                        operandA = !operandA;
+                        _operands.Push(operandA);
+                        // Console.WriteLine("Executed sentence: ~" + !operandA);
+                        //Console.WriteLine("Pushed result: " + operandA);
+                    }
+                    else
+                    {
+                        operandA = _operands.Pop();
+                        //Console.WriteLine("Popped: " + operandA.Symbol);
+                        operandB = _operands.Pop();
+                        //Console.WriteLine("Popped: " + operandB.Symbol);
+
+                        string smallSentence = operandB + parsing + operandA;
+                        //Console.WriteLine(smallSentence);
+                        // Console.WriteLine("Executed sentence: " + smallSentence);
+
+                        smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
+
+                        _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
+                        // Console.WriteLine("Pushed result: " + smallSentenceE);
+                    }
+                }
+            }
 
                 bool final = _operands.Pop();
 

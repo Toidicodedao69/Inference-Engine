@@ -28,16 +28,18 @@ namespace InferenceEngine
                 string parsing;
                 if (pattern.IsMatch(expression[i].ToString()))
                 {
-                    parsing = expression[i].ToString(); //1 char symbol
-                    if (i <= expression.Length - 2)
+                    parsing = expression[i].ToString(); 
+
+                    // Keeps reading symbol until meets a special character
+                    while (i + 1 < expression.Length && pattern.IsMatch(expression[i + 1].ToString()))
                     {
-                        if (pattern.IsMatch(expression[i + 1].ToString())) //2nd char of the symbol
-                        {
-                            parsing += expression[i + 1].ToString(); //symbol with number
-                            i = i + 1;
-                        }
+                        parsing += expression[i + 1].ToString();
+                        i = i + 1;
                     }
                     result += parsing;
+
+                    // Separate symbols when pushing to stack. For example: p12/b13/e12
+                    result += "/";
                 }
                 else //not alphanumeric => connective or maybe brackets () //when to push onto the stack?
                 {
@@ -106,7 +108,7 @@ namespace InferenceEngine
                 result += _parseStack.Pop();
             }
 
-            //Console.WriteLine(result);
+            Console.WriteLine(result);
             return result;
         }
 
