@@ -80,13 +80,13 @@ namespace InferenceEngine
 
         // This 2 methods are used for Horn Knowledge Base which contains sentence in the following form: P1 & P2 & ... & Pn => Q
 
-        // getleft returns the List of all symbols on the left before "=>" connective, which is P1, P2, ...,Pn
-        // getRight returns the conclusion symbol on the right after "=>" connective, which is Q
-        public List<string> getLeft()
+        // getPremises returns the List of all symbols on the left before "=>" connective, which is P1, P2, ...,Pn
+        // getConclusion returns the conclusion symbol on the right after "=>" connective, which is Q
+        public List<string> getPremises()
         {
             return _leftSymbols;
         }
-        public string getRight()
+        public string getConclusion()
         { 
             return _symbols.Last();
         }   

@@ -29,7 +29,6 @@ namespace InferenceEngine
                     _facts.Add(s.getSentence);
                 }
             }
-
         }
 
         public override void Entails()
@@ -40,18 +39,20 @@ namespace InferenceEngine
 
             while (_subgoals.Count > 0)
             {
-                 symbol= _subgoals.Dequeue();
+                 symbol = _subgoals.Dequeue();
 
                 _closed_subgoals.Enqueue(symbol);
 
+                // If the symbol is not given true in KB
                 if (!_facts.Contains(symbol))
                 {
                     List<Sentence> sub_goal_sentences = new List<Sentence>();
 
                     foreach (Sentence s in _KB.getSentences)
                     {
-                        if (s.getRight() == symbol)
+                        if (s.getConclusion() == symbol)
                         {
+                            // Get all the sentences that concluding symbol
                             sub_goal_sentences.Add(s);
                         }
                     }
@@ -65,10 +66,11 @@ namespace InferenceEngine
                     {
                         foreach (Sentence s in sub_goal_sentences)
                         {
-                            foreach (string sym in s.getLeft())
+                            foreach (string sym in s.getPremises())
                             {
                                 if (!_closed_subgoals.Contains(sym))
                                 {
+                                    // Add new sub goals which do not exist in _closed_subgoals
                                     _subgoals.Enqueue(sym);
                                 }
                             }

@@ -12,10 +12,13 @@ namespace InferenceEngine
         private Queue<string> _symbols;     // List of already true/inferred symbols
         private KnowledgeBase _KB;
         private List<String> _solution;     // List contains the solution path 
+        private bool _entails;
         public ForwardChaining(KnowledgeBase kB)
         {
             _KB = kB;
             _symbols = new Queue<string>();
+            _solution = new List<string>();
+            _entails = false;
 
             // Get already true symbols in the kB
             foreach (Sentence s in _KB.getSentences)
@@ -25,7 +28,6 @@ namespace InferenceEngine
                     _symbols.Enqueue(s.getSentence);
                 }
             }
-            _solution = new List<string>();
         }
         public override void Entails()
         {
@@ -37,18 +39,22 @@ namespace InferenceEngine
 
                 foreach (Sentence s in _KB.getSentences)
                 {
-                    if (s.Count > 0 && s.getLeft().Contains(symbol))
+                    if (s.Count > 0 && s.getPremises().Contains(symbol))
                     {
                         s.Count--;
 
+                        // If all the premises are satisfied
                         if (s.Count == 0)
                         {
-                            if (s.getRight() == _KB.Query.getSentence)
+                            // If the query is inferred
+                            if (s.getConclusion() == _KB.Query.getSentence)
                             {
-                                _solution.Add(s.getRight());
+                                _solution.Add(s.getConclusion());
+                                _entails = true;
                                 break;
                             }
-                            _symbols.Enqueue(s.getRight());
+                            // Add the newly inferred symbol to the queue
+                            _symbols.Enqueue(s.getConclusion());
                         }
                     }
                 }
@@ -57,7 +63,7 @@ namespace InferenceEngine
 
         public override void PrintResult()
         {
-            if (_solution.Contains(_KB.Query.getSentence))
+            if (_entails)
             {
                 Console.Write("YES: ");
 
