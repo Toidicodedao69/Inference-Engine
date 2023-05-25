@@ -61,7 +61,30 @@ namespace InferenceEngine
                         parsing = expression[i].ToString();
                         if (IsConnective(expression[i].ToString())) //1 character connective - &, ~
                         {
-                            parsing = expression[i].ToString();
+                            if (expression[i].ToString() == "~")
+                            {
+                                // If there are more than 1 negation symbols
+                                while (i + 1 < expression.Length && expression[i + 1].ToString() == "~")
+                                {
+                                    parsing += expression[i + 1];
+                                    i++;
+                                }
+                                
+                                // If the number of ~ symbols are even
+                                if (parsing.Length % 2 == 1)
+                                {
+                                    parsing = "~";
+                                }
+                                // If ther number of ~ symbols are odd
+                                else
+                                {
+                                    parsing = "";
+                                }
+                            }
+                            else
+                            {
+                                parsing = expression[i].ToString();
+                            }
                         }
                         else//2 character connective or 3 char connective
                         {

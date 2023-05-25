@@ -119,11 +119,6 @@ namespace InferenceEngine
                             //Console.WriteLine("Executed sentence: ~" + !operandA);
                             //Console.WriteLine("Pushed result: " + operandA);
                         }
-
-                        if (i + 1 < postfix.Length && postfix[i + 1].ToString() == "~")
-                        {
-                            i = i + 1; //skips the symbol
-                        }
                     }
                     else
                     {
