@@ -131,7 +131,6 @@ namespace InferenceEngine
                 result += _parseStack.Pop();
             }
 
-            //Console.WriteLine(result);
             return result;
         }
 

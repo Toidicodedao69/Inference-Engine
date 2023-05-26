@@ -11,13 +11,11 @@ namespace InferenceEngine
     {
         private KnowledgeBase _KB;
         private int _numOfModels;
-        //private int _count;
         private bool _entails;
         public TruthTable(KnowledgeBase KB)
         {
             _KB = KB;
             _numOfModels = 0;
-            //_count = 0;
             _entails = false;
         }
 

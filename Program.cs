@@ -13,7 +13,7 @@ namespace InferenceEngine
             kB.ReadFile(args[1]);
 
             // Read method
-            switch (args[0])
+            switch (args[0].ToLower())
             {
                 case "fc":
                     algorithm = new ForwardChaining(kB);

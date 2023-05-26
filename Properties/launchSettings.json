@@ -2,7 +2,7 @@
   "profiles": {
     "InferenceEngine": {
       "commandName": "Project",
-      "commandLineArgs": "tt truthtable_test.txt"
+      "commandLineArgs": "BC cycle.txt"
     }
   }
 }
