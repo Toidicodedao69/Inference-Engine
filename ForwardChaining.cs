@@ -67,7 +67,7 @@ namespace InferenceEngine
             {
                 Console.Write("YES: ");
 
-                foreach (string s in _solution)
+                foreach (string s in _solution.Distinct().ToList())
                 {
                     Console.Write(s + " ");
                 }
