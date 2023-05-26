@@ -33,14 +33,11 @@ namespace InferenceEngine
         {
             bool final = true;
             bool result = false;
-           // string final2 = "KB = True";
             foreach (Sentence s in KB.getSentences)
             {
                 result = PL_True(s);
                 final = final && result; //evaluate all KB sentences, if all true then true;
-                //final2 += "&" + result.ToString();
             }
-            //Console.WriteLine(final2);
             return final;
         }
 
@@ -49,15 +46,6 @@ namespace InferenceEngine
             ExpressionParser parser = new ExpressionParser();
 
             string postfix = parser.Parse(sentence.getSentence);
-            //Console.WriteLine("Postfix:" + postfix);
-
-            //string symbols1 = "";
-            //foreach (var m in _evals)
-            //{
-            //    symbols1 += " [" + m.Key + ", " + m.Value + "]";
-            //}
-
-            //Console.WriteLine("Model symbols while evaluating PLTrue: " + symbols1);
 
             Regex pattern = new Regex("[a-zA-Z0-9]");
             Regex pattern2 = new Regex("[0-9]");
@@ -83,9 +71,6 @@ namespace InferenceEngine
                     if (_evals.ContainsKey(parsing))
                     {
                         _operands.Push(_evals[parsing]); //push the scanned symbol onto the stack
-                        //Console.WriteLine("Pushed [{0}, {1}]", parsing, _evals[parsing]);
-                        //Console.WriteLine("Pushed: " + e.Symbol + " Value: " + e.BoolValue);
-                        //break; //break out of the foreach loop
                         i++;
                     }
                 }
@@ -116,25 +101,17 @@ namespace InferenceEngine
                             operandA = _operands.Pop();
                             operandA = !operandA;
                             _operands.Push(operandA);
-                            //Console.WriteLine("Executed sentence: ~" + !operandA);
-                            //Console.WriteLine("Pushed result: " + operandA);
                         }
                     }
                     else
                     {
                         operandA = _operands.Pop();
-                       // Console.WriteLine("Popped: " + operandA);
                         operandB = _operands.Pop();
-                        // Console.WriteLine("Popped: " + operandB);
 
-                        //string smallSentence = operandB + parsing + operandA;
-                        //Console.WriteLine(smallSentence);
-                        //Console.WriteLine("Executed sentence: " + smallSentence);
 
                         smallSentenceE = Evaluate(operandB, operandA, parsing); //previous first
 
                         _operands.Push(smallSentenceE); //push the result of the evaluated sentence onto the stack
-                        //Console.WriteLine("Pushed result: " + smallSentenceE);
                     }
                 }
             }

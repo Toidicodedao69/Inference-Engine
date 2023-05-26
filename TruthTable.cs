@@ -36,22 +36,10 @@ namespace InferenceEngine
 
         private bool CheckAll(KnowledgeBase KB, Sentence query, List<string> symbols, Model model)
         {
-            //string symbols3 = "";
-            //foreach (var m in model.ModelSet)
-            //{
-            //    symbols3 += "[" + m.Key + "-" + m.Value + "] ";
-            //}
-            //Console.WriteLine("Model symbols and value: " + symbols3);
             if (symbols.Count == 0)
             {
-                //if PL - TRUE? (KB, model) then return PL - TRUE? (α, model)
-                //else return true // when KB is false, always return true
-                //_count++;
-                //Console.WriteLine("\nChecking if model is true with KB\n");
-                //Console.WriteLine("Count: " + _count);
                 if (model.PL_True(KB))
                 {
-                   // Console.WriteLine("\nChecking if model is true with Query: {0}\n", query.getSentence);
                     if (model.PL_True(query))
                     {
                         _numOfModels++;
@@ -76,17 +64,8 @@ namespace InferenceEngine
 
                 //assign the new model to be the input model value plus the new symbol with either True/False bool value
                 bool modelTB = CheckAll(KB, query, rest, modelT.Extend(first, true));
-                //Console.WriteLine("True branch executed");
-                //foreach (var i in modelT.ModelSet)
-                //{
-                //    Console.WriteLine(i.Key + " " + i.Value);
-                //}
+
                 bool modelFB = CheckAll(KB, query, rest, modelF.Extend(first, false));
-                //Console.WriteLine("False branch executed");
-                //foreach (var i in modelF.ModelSet)
-                //{
-                //    Console.WriteLine(i.Key + " " + i.Value);
-                //}
 
                 return modelTB && modelFB;
             }
