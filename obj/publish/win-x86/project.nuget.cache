@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Dr7k5dqTLVqEm9lq5Ybbmd6MxWsf/VuikKveAL5Bxq/1zrTV9x5hvOjbWJsrJQClE9bCqaccbCQk8GUmYntAiw==",
+  "success": true,
+  "projectFilePath": "E:\\Swinburne 2021 - 2024\\SEM 1 2023\\COS30019 - Introduction to Artificial Intelligence\\Assignment 2\\Inference-Engine\\InferenceEngine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.15\\microsoft.netcore.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.15\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.15\\microsoft.aspnetcore.app.runtime.win-x86.6.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}

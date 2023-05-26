@@ -1,0 +1,15 @@
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Release\net6.0\InferenceEngine.exe
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Release\net6.0\InferenceEngine.deps.json
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Release\net6.0\InferenceEngine.runtimeconfig.json
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Release\net6.0\InferenceEngine.dll
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\bin\Release\net6.0\InferenceEngine.pdb
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.csproj.AssemblyReference.cache
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.GeneratedMSBuildEditorConfig.editorconfig
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.AssemblyInfoInputs.cache
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.AssemblyInfo.cs
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.csproj.CoreCompileInputs.cache
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.dll
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\refint\InferenceEngine.dll
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.pdb
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\InferenceEngine.genruntimeconfig.cache
+E:\Swinburne 2021 - 2024\SEM 1 2023\COS30019 - Introduction to Artificial Intelligence\Assignment 2\Inference-Engine\obj\Release\net6.0\ref\InferenceEngine.dll

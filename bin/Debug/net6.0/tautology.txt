@@ -1,4 +1,0 @@
-TELL
-a||~a=>b;c12;
-ASK
-b
